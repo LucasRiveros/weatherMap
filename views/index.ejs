@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="container">
+      <fieldset>
+        <form action="/" method="post">
+          <!-- <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required> -->
+          <h1>Haga click en una ciudad, luego en Get Weather, para conocer su clima</h1>
+          <div id="map"></div>
+          
+          <input type="submit" class="ghost-button" value="Get Weather">
+        </form>
+        <% if(weather !== null){ %>
+          <p><%= weather %></p>
+        <% } %>
+
+        <% if(error !== null){ %>
+          <p><%= error %></p>
+        <% } %>
+      </fieldset>
+    </div>
+  <script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -32.142933, lng: -63.801753 },
+        zoom: 7
+      });      
+      google.maps.event.addListener(map, 'click', function (event) {
+      alert("Latitude: " + event.latLng.lat() + " " + ", longitude: "+event.latLng.lng() )
+      let lat = event.latLng.lat()
+      let lng = event.latLng.lng()
+      });
+    }
+  </script>  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSt7Mfd7KbyyGCgBFpr61VrtW5uYI5O6w&callback=initMap" async defer></script>
+  </body>
+</html>
