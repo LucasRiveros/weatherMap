@@ -7,6 +7,7 @@ body {
   width: 800px;
   margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
+  text-align: center;
   background: #283c86;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #45a247, #283c86);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #45a247, #283c86); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -79,6 +80,6 @@ p {
 }
 
 #map {
-  height: 300px;
+  height: 500px;
   width: 100%;
 }

@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+var apikey = '6568c5ad8384e98b24c263cea110ddce';
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,24 +13,21 @@ app.get('/', function (req, res) {
 })
 
 app.post('/', function (req, res) {
-  //var city = req.body.city;
-  // var url = `https://api.openweathermap.org/data/2.5/find?q=${city}&units=metric&appid=${apiKey}`
-  // var url = 'https://api.openweathermap.org/data/2.5/find?q='+city+'&units=metric&appid='+apiKey;
-  
-  //var location = JSON.parse(req.body.location);
-  var url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + location.centroide.lat + '&lon=' + location.centroide.lon +'&units=metric&appid='+apiKey;
+  var lat = req.body.lat;
+  var lng = req.body.lng;
+
+  var url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng +'&units=metric&appid='+apikey;
   request(url, function (err, response, data) {
     if(err){
-      res.render('index', {weather: null, error: err});
+      res.render('detail', {weather: null, error: err});
     } else {
-      //console.log(data)
       var weatherData = JSON.parse(data)
       console.log(weatherData);
       if(weatherData.cod != 200){
-        res.render('index', {weather: null, error: 'Error, no existen datos'});
+        res.render('detail', {weather: null, error: 'Error, no existen datos'});
       } else {
         var temp = weatherData.main.temp;
-        var name = location.nombre;
+        var name = weatherData.name;
         var text = 'La temperatura en ' + name + ' es de: ' + temp + '°C'
         res.render('detail', {weather: text, error: null});
       }
